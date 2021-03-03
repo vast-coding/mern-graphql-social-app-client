@@ -25,6 +25,7 @@ const Login = (props) => {
       props.history.push('/')
     },
     onError(err) {
+      console.log({ err })
       setErrors(err.graphQLErrors[0].extensions.exception.errors)
     },
     variables: values,
