@@ -9,7 +9,7 @@ import App from './App'
 import { setContext } from '@apollo/client/link/context'
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000',
+  uri: 'https://gentle-tor-50679.herokuapp.com/',
 })
 
 const authLink = setContext(() => {
