@@ -4,6 +4,7 @@
 npm install\
   @apollo/client\
   date-fns\
+  graphql\
   jwt-decode\
   react-router-dom\
   semantic-ui-css\
