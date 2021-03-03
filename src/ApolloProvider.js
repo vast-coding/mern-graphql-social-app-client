@@ -23,8 +23,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
-export default () => (
+const ApolloProvider = () => (
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>
 )
+
+export default ApolloProvider
