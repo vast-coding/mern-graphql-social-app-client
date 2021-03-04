@@ -1,3 +1,5 @@
+import './buttonGroup.css'
+
 import { Button, Card, Icon, Label } from 'semantic-ui-react'
 
 import { DeleteButton } from './DeleteButton'
@@ -59,8 +61,12 @@ export const ButtonGroup = ({
   )
 
   return (
-    <Card.Content extra>
-      <LikeButton user={user} post={{ id, likeCount, likes }} />
+    <Card.Content className="buttonGroup" extra>
+      <LikeButton
+        className="LikeButton"
+        user={user}
+        post={{ id, likeCount, likes }}
+      />
       <CommentBtn />
       {isPostAuthor && (
         <DeleteButton postId={id} redirect={deletePostCallback} />

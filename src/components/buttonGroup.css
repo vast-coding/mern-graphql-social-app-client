@@ -1,0 +1,15 @@
+@media only screen and (max-width: 1000px) {
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  .buttonGroup .button + .button {
+    margin-top: 1rem;
+    margin-left: 0;
+  }
+
+  .buttonGroup .button {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+}
