@@ -1,10 +1,10 @@
 import { Grid, Transition } from 'semantic-ui-react'
-import { useContext, useEffect } from 'react'
 
 import { AuthContext } from '../context/auth'
 import { FETCH_POSTS_QUERY } from '../utils/graphql'
 import { PostCard } from '../components/PostCard'
 import { PostForm } from '../components/PostForm'
+import { useContext } from 'react'
 import { useQuery } from '@apollo/client'
 
 const Home = () => {
