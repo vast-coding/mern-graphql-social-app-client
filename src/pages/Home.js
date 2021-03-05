@@ -8,20 +8,14 @@ import { PostForm } from '../components/PostForm'
 import { useQuery } from '@apollo/client'
 
 const Home = () => {
-  // useEffect(() => {
-  //   return () => {
-  //     console.log('<Home> unmounted')
-  //   }
-  // }, [])
   const { user } = useContext(AuthContext)
   const { loading, data } = useQuery(FETCH_POSTS_QUERY, {
     // fetchPolicy: 'network-only',
-    onCompleted: () => console.log('FETCH_POSTS_QUERY completed'),
+    onCompleted: () => {
+      // console.log('FETCH_POSTS_QUERY completed')
+    },
   })
 
-  useEffect(() => {
-    console.log('<Home> ', { loading, data })
-  }, [loading, data])
   let posts = null
   if (data) {
     posts = data.getPosts

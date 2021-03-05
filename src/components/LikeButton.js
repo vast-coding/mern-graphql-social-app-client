@@ -33,18 +33,17 @@ export const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
   const [liked, setLiked] = useState(false)
 
   useEffect(() => {
-    const userLikesThisPost =
+    const userLikesThisPost = Boolean(
       user && likes.find((like) => like.username === user.username)
-    console.log({ userLikesThisPost })
-    if (userLikesThisPost) {
-      setLiked(true)
-    } else setLiked(false)
+    )
+
+    setLiked(userLikesThisPost)
   }, [user, likes])
 
   const [likePost] = useMutation(LIKE_POST_MUTATION, {
     variables: { postId: id },
     onCompleted: () => {
-      console.log('LIKE_POST completed')
+      // console.log('LIKE_POST completed')
     },
   })
 

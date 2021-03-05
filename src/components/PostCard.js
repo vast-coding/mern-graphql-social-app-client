@@ -21,7 +21,7 @@ export const PostCard = ({ post }) => {
         commentCount={commentCount}
         deletePostCallback={() => {}}
         handleComment={false}
-        id={id}
+        postId={id}
         isPostAuthor={isPostAuthor}
         likeCount={likeCount}
         likes={likes}

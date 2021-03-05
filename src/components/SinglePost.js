@@ -17,7 +17,9 @@ export const SinglePost = ({ match, history }) => {
 
   const handleComment = (event) => setComment(event.target.value)
 
-  const handleCommentFocus = () => commentInputRef?.current?.focus()
+  const handleFocusInput = () => {
+    commentInputRef?.current?.focus()
+  }
 
   const { data } = useQuery(FETCH_POST_QUERY, {
     update() {
@@ -100,12 +102,13 @@ export const SinglePost = ({ match, history }) => {
             <ButtonGroup
               commentCount={commentCount}
               deletePostCallback={redirectToHome}
-              handleComment={handleCommentFocus}
-              id={id}
+              handleComment={handleFocusInput}
+              postId={id}
               isPostAuthor={isPostAuthor}
               likeCount={likeCount}
               likes={likes}
               user={user}
+              isSinglePostPage={true}
             />
           </Card>
           {user && (

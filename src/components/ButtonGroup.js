@@ -9,8 +9,9 @@ export const ButtonGroup = ({
   commentCount,
   deletePostCallback,
   handleComment,
-  id,
+  postId,
   isPostAuthor,
+  isSinglePostPage = false,
   likeCount,
   likes,
   user,
@@ -20,16 +21,17 @@ export const ButtonGroup = ({
       <LikeButton
         className="LikeButton"
         user={user}
-        post={{ id, likeCount, likes }}
+        post={{ id: postId, likeCount, likes }}
       />
       <ButtonComment
         commentCount={commentCount}
         handleComment={handleComment}
-        id={id}
+        postId={postId}
+        isSinglePostPage={isSinglePostPage}
       />
 
       {isPostAuthor && (
-        <DeleteButton postId={id} redirect={deletePostCallback} />
+        <DeleteButton postId={postId} redirect={deletePostCallback} />
       )}
     </Card.Content>
   )

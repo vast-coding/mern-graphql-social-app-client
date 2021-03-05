@@ -12,7 +12,6 @@ const removeToken = () => {
 }
 
 export const useSession = () => {
-  console.log('useSession')
   const token = localStorage.getItem(JWT)
 
   if (token) {
