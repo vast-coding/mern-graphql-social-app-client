@@ -1,7 +1,7 @@
 import 'semantic-ui-css/semantic.min.css'
 import './App.css'
 
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Route, HashRouter as Router } from 'react-router-dom'
 
 import { AuthProvider } from './context/auth'
 import AuthRoute from './utils/AuthRoute'
