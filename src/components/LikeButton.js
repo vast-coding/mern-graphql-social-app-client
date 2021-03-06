@@ -1,4 +1,4 @@
-import { Button, Icon, Label } from 'semantic-ui-react'
+import { Button, Icon, Label, Loader } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
 import { useEffect, useState } from 'react'
 
@@ -18,10 +18,19 @@ const LIKE_POST_MUTATION = gql`
   }
 `
 
-const ButtonContents = ({ likeCount, isLiked }) => (
+const ButtonContents = ({ likeCount, isLiked, isLoading }) => (
   <>
     <Button as="div" color="teal" basic={!isLiked}>
-      <Icon name="heart" />
+      {!isLoading ? (
+        <Icon name="heart" />
+      ) : (
+        <Loader
+          active
+          inline="centered"
+          size="mini"
+          style={{ display: 'inline-block' }}
+        />
+      )}
     </Button>
     <Label basic color="teal" pointing="left">
       {likeCount}
@@ -31,7 +40,6 @@ const ButtonContents = ({ likeCount, isLiked }) => (
 
 export const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
   const [liked, setLiked] = useState(false)
-
   useEffect(() => {
     const userLikesThisPost = Boolean(
       user && likes.find((like) => like.username === user.username)
@@ -39,8 +47,7 @@ export const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
 
     setLiked(userLikesThisPost)
   }, [user, likes])
-
-  const [likePost] = useMutation(LIKE_POST_MUTATION, {
+  const [likePost, { loading }] = useMutation(LIKE_POST_MUTATION, {
     variables: { postId: id },
     onCompleted: () => {
       // console.log('LIKE_POST completed')
@@ -55,7 +62,11 @@ export const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
   return (
     <MyPopup content={toolTipMessage}>
       <Button as={as} to={to} onClick={handler} labelPosition="right">
-        <ButtonContents likeCount={likeCount} isLiked={liked} />
+        <ButtonContents
+          likeCount={likeCount}
+          isLiked={liked}
+          isLoading={loading}
+        />
       </Button>
     </MyPopup>
   )
