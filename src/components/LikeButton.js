@@ -18,19 +18,27 @@ const LIKE_POST_MUTATION = gql`
   }
 `
 
+// styling is to match existing heart icon
+const Spinner = () => (
+  <Loader
+    active
+    inline="centered"
+    size="mini"
+    style={{
+      display: 'inline-block',
+      height: '12px',
+      marginTop: '-3px',
+      width: '16.5px',
+      marginLeft: '-3px',
+      marginRight: '6px',
+    }}
+  />
+)
+
 const ButtonContents = ({ likeCount, isLiked, isLoading }) => (
   <>
     <Button as="div" color="teal" basic={!isLiked}>
-      {!isLoading ? (
-        <Icon name="heart" />
-      ) : (
-        <Loader
-          active
-          inline="centered"
-          size="mini"
-          style={{ display: 'inline-block' }}
-        />
-      )}
+      {isLoading ? <Spinner /> : <Icon name="heart" />}
     </Button>
     <Label basic color="teal" pointing="left">
       {likeCount}
@@ -55,9 +63,15 @@ export const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
   })
 
   const toolTipMessage = liked ? 'Unlike post' : 'Like post'
-  const as = user ? 'div' : Link
-  const to = user ? null : '/Login'
-  const handler = user ? likePost : null
+  let as = Link
+  let to = '/Login'
+  let handler = null
+
+  if (user) {
+    as = 'div'
+    to = 'null'
+    handler = likePost
+  }
 
   return (
     <MyPopup content={toolTipMessage}>
