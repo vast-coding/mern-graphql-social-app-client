@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { AuthContext } from '../context/auth'
+import { AuthContext } from '../../context/auth'
 import { MenuBarAuth } from './MenuBarAuth'
 import { MenuBarDefault } from './MenuBarDefault'
 
@@ -10,4 +10,4 @@ function MenuBar() {
   return user ? <MenuBarAuth user={user} logout={logout} /> : <MenuBarDefault />
 }
 
-export default MenuBar
+export { MenuBar }
