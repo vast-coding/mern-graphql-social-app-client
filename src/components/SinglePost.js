@@ -4,7 +4,7 @@ import { useContext, useRef, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
 
 import { AuthContext } from '../context/auth'
-import { ButtonGroup } from './ButtonGroup'
+import { ButtonGroup } from './buttonGroup'
 import { PostHeader } from './PostHeader'
 import { SinglePostAddComment } from './SinglePostAddComment'
 import { SinglePostComment } from './SinglePostComment'

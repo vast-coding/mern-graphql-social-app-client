@@ -1,5 +1,5 @@
 import { AuthContext } from '../context/auth'
-import { ButtonGroup } from './ButtonGroup'
+import { ButtonGroup } from './buttonGroup'
 import { Card } from 'semantic-ui-react'
 import { PostHeader } from './PostHeader'
 import { useContext } from 'react'

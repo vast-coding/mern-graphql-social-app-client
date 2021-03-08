@@ -1,8 +1,8 @@
 import { Button, Icon, Label } from 'semantic-ui-react'
 
-import { AuthContext } from '../context/auth'
+import { AuthContext } from '../../context/auth'
 import { Link } from 'react-router-dom'
-import { MyPopup } from './MyPopup'
+import { MyPopup } from '../MyPopup'
 import { useContext } from 'react'
 
 const CommentButtonLink = ({ commentCount, redirect }) => {

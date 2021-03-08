@@ -2,7 +2,7 @@ import './buttonGroup.css'
 
 import { ButtonComment } from './ButtonComment'
 import { Card } from 'semantic-ui-react'
-import { DeleteButton } from './DeleteButton'
+import { DeleteButton } from '../DeleteButton'
 import { LikeButton } from './LikeButton'
 
 export const ButtonGroup = ({

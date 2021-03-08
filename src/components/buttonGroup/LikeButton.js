@@ -3,7 +3,7 @@ import { gql, useMutation } from '@apollo/client'
 import { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
-import { MyPopup } from './MyPopup'
+import { MyPopup } from '../MyPopup'
 
 const LIKE_POST_MUTATION = gql`
   mutation likePost($postId: ID!) {
