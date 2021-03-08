@@ -1,6 +1,6 @@
 import { Card } from 'semantic-ui-react'
-import { DeleteButton } from './DeleteButton'
-import { utcToDate } from '../utils/utcToDate'
+import { DeleteButton } from '../DeleteButton'
+import { utcToDate } from '../../utils/utcToDate'
 
 export const SinglePostComment = ({ comment, isPostAuthor, postId }) => (
   <Card fluid key={comment.id}>

@@ -11,7 +11,7 @@ import Login from './pages/Login'
 import { MenuBar } from './components/menuBar'
 import React from 'react'
 import Register from './pages/Register'
-import { SinglePost } from './components/SinglePost'
+import { SinglePost } from './components/singlePost'
 
 function App() {
   return (
