@@ -1,9 +1,12 @@
-import { Card, Form } from 'semantic-ui-react'
+import { Card, Form, Icon } from 'semantic-ui-react'
+
+import { ButtonSpinner } from '../buttonGroup/ButtonSpinner'
 
 export const SinglePostAddComment = ({
   comment,
   commentInputRef,
   handleComment,
+  loading,
   submitComment,
 }) => (
   <Card fluid>
@@ -25,6 +28,7 @@ export const SinglePostAddComment = ({
             disabled={comment.trim() === ''}
             onClick={submitComment}
           >
+            {loading ? <ButtonSpinner /> : <Icon name="send" />}
             Submit
           </button>
         </div>

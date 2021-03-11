@@ -1,6 +1,7 @@
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Icon } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
 
+import { ButtonSpinner } from './buttonGroup/ButtonSpinner'
 import { FETCH_POSTS_QUERY } from '../utils/graphql'
 import { useForm } from '../utils/useForm'
 
@@ -14,7 +15,7 @@ export const PostForm = () => {
     body: '',
   })
 
-  const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
+  const [createPost, { error, loading }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     // after sending new post to server, update local cache
     // refreshes UI without api call
@@ -52,6 +53,7 @@ export const PostForm = () => {
             error={Boolean(error)}
           />
           <Button type="submit" color="teal">
+            {loading ? <ButtonSpinner /> : <Icon name="send" />}
             Submit
           </Button>
         </Form.Field>

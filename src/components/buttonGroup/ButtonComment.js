@@ -11,6 +11,7 @@ const CommentButtonLink = ({ commentCount, redirect }) => {
       <Button labelPosition="right" as={Link} to={redirect}>
         <Button color="blue" basic>
           <Icon name="comments" />
+          Post
         </Button>
         <Label basic color="blue" pointing="left">
           {commentCount}

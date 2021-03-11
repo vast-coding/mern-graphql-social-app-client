@@ -43,8 +43,15 @@ export const DeleteButton = ({ postId, commentId, redirect }) => {
   return (
     <>
       <MyPopup content={popupMessage}>
-        <Button as="div" color="red" floated="right" onClick={openConfirmModal}>
-          <Icon style={{ margin: 0 }} name="trash" />
+        <Button
+          basic
+          as="div"
+          color="red"
+          floated="right"
+          onClick={openConfirmModal}
+        >
+          <Icon name="trash" />
+          Delete
         </Button>
       </MyPopup>
 

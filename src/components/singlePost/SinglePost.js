@@ -1,13 +1,12 @@
-import { CREATE_COMMENT_MUTATION, FETCH_POST_QUERY } from './SinglePost.graphql'
 import { Card, Grid, Image } from 'semantic-ui-react'
 import { useContext, useRef, useState } from 'react'
-import { useMutation, useQuery } from '@apollo/client'
 
 import { AuthContext } from '../../context/auth'
 import { ButtonGroup } from '../buttonGroup'
 import { PostHeader } from '../PostHeader'
 import { SinglePostAddComment } from './SinglePostAddComment'
 import { SinglePostComment } from './SinglePostComment'
+import { useGraphQLFetchPost } from './useGraphQLFetchPost'
 
 export const SinglePost = ({ match, history }) => {
   const postId = match.params.postId
@@ -20,50 +19,25 @@ export const SinglePost = ({ match, history }) => {
   const handleFocusInput = () => {
     commentInputRef?.current?.focus()
   }
+  const clearInput = () => {
+    setComment('')
+    commentInputRef.current.blur()
+  }
 
-  const { data } = useQuery(FETCH_POST_QUERY, {
-    update() {
-      setComment('')
-    },
-    variables: { postId, body: comment },
-    onError(err) {
-      // needed to stop errors from blockingi UI
-      console.log({ singlePost: true, func: 'fetch post', err })
-    },
+  const { submitComment, data, loading } = useGraphQLFetchPost({
+    comment,
+    clearInput,
+    postId,
+    redirectToLogin,
   })
 
   const getPost = data?.getPost
-
-  const [submitComment] = useMutation(CREATE_COMMENT_MUTATION, {
-    update() {
-      setComment('')
-      commentInputRef.current.blur()
-    },
-    // fetchPolicy: 'no-cache',
-    onCompleted: () => {
-      // history.push('/')
-      console.log('CREATE_COMMENT completed')
-    },
-    variables: {
-      postId,
-      body: comment,
-    },
-    onError(err) {
-      // needed to stop errors from blockingi UI
-      console.log({
-        singlePost: true,
-        func: 'submitComment mutation',
-        err,
-      })
-      redirectToLogin()
-    },
-  })
 
   const redirectToHome = () => {
     history.push('/')
   }
 
-  const redirectToLogin = () => {
+  function redirectToLogin() {
     history.push('/login')
   }
 
@@ -117,6 +91,7 @@ export const SinglePost = ({ match, history }) => {
               commentInputRef={commentInputRef}
               handleComment={handleComment}
               submitComment={submitComment}
+              loading={loading}
             />
           )}
           {comments.map((comment) => (

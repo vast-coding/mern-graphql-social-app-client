@@ -1,44 +1,15 @@
-import { Button, Icon, Label, Loader } from 'semantic-ui-react'
-import { gql, useMutation } from '@apollo/client'
+import { Button, Icon, Label } from 'semantic-ui-react'
 import { useEffect, useState } from 'react'
 
+import { ButtonSpinner } from './ButtonSpinner'
 import { Link } from 'react-router-dom'
 import { MyPopup } from '../MyPopup'
-
-const LIKE_POST_MUTATION = gql`
-  mutation likePost($postId: ID!) {
-    likePost(postId: $postId) {
-      id
-      likes {
-        id
-        username
-      }
-      likeCount
-    }
-  }
-`
-
-// styling is to match existing heart icon
-const Spinner = () => (
-  <Loader
-    active
-    inline="centered"
-    size="mini"
-    style={{
-      display: 'inline-block',
-      height: '12px',
-      marginTop: '-3px',
-      width: '16.5px',
-      marginLeft: '-3px',
-      marginRight: '6px',
-    }}
-  />
-)
+import { useLike } from './useLike'
 
 const ButtonContents = ({ likeCount, isLiked, isLoading }) => (
   <>
     <Button as="div" color="teal" basic={!isLiked}>
-      {isLoading ? <Spinner /> : <Icon name="heart" />}
+      {isLoading ? <ButtonSpinner /> : <Icon name="heart" />}Like
     </Button>
     <Label basic color="teal" pointing="left">
       {likeCount}
@@ -55,12 +26,8 @@ export const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
 
     setLiked(userLikesThisPost)
   }, [user, likes])
-  const [likePost, { loading }] = useMutation(LIKE_POST_MUTATION, {
-    variables: { postId: id },
-    onCompleted: () => {
-      // console.log('LIKE_POST completed')
-    },
-  })
+
+  const { likePost, loading } = useLike(id)
 
   const toolTipMessage = liked ? 'Unlike post' : 'Like post'
   let as = Link
@@ -75,7 +42,14 @@ export const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
 
   return (
     <MyPopup content={toolTipMessage}>
-      <Button as={as} to={to} onClick={handler} labelPosition="right">
+      <Button
+        as={as}
+        to={to}
+        onClick={handler}
+        labelPosition="right"
+        style={{ marginBottom: '5px' }}
+        data-compnt="LikeButton"
+      >
         <ButtonContents
           likeCount={likeCount}
           isLiked={liked}
